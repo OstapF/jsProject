@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    fetch('http://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(users => {
+            let divStyle = document.createElement('div');
+            divStyle.style.display = 'flex';
+            divStyle.style.justifyContent = 'center';
+            divStyle.style.alignItems = 'center';
+            divStyle.style.flexWrap = 'wrap'
+            for (const user of users) {
+                let div = document.createElement('div');
+                let h3 = document.createElement('h3');
+                h3.innerText = user.id + ". " + user.name
+                let button = document.createElement('button');
+                button.innerText = 'Детальна інформація';
+                button.addEventListener("click", () => {
+                    window.location.href = `user-details.html?id=${user.id}`;
+                })
+                div.append(h3, button)
+                div.style.display = 'inline-block';
+                div.style.width = '45%';
+                div.style.margin = '10px';
+                div.style.padding = '10px';
+                div.style.border = '1px solid #ccc';
+                div.style.display = 'flex';
+                div.style.flexDirection = 'column';
+                div.style.alignItems = 'center';
+                divStyle.appendChild(div)
+
+            }
+            document.body.appendChild(divStyle)
+        });
+
+
+</script>
+
+
+</body>
+</html>
